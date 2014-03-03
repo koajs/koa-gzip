@@ -1,0 +1,54 @@
+{
+  "name": "koa-gzip",
+  "version": "0.0.0",
+  "description": "gzip support for koa responses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test-all"
+  },
+  "config": {
+    "blanket": {
+      "pattern": "koa-gzip/lib",
+      "data-cover-flags": {
+        "debug": false
+      }
+    },
+    "travis-cov": {
+      "threshold": 100
+    }
+  },
+  "dependencies": {
+    "thunkify-wrap": "0.0.3"
+  },
+  "devDependencies": {
+    "autod": "*",
+    "blanket": "*",
+    "contributors": "*",
+    "cov": "*",
+    "coveralls": "*",
+    "koa": "0.5.0",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*",
+    "should": "3.1.3",
+    "supertest": "0.9.0",
+    "travis-cov": "*"
+  },
+  "homepage": "https://github.com/fengmk2/koa-gzip",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fengmk2/koa-gzip.git",
+    "web": "https://github.com/fengmk2/koa-gzip"
+  },
+  "bugs": {
+    "url": "https://github.com/fengmk2/koa-gzip/issues",
+    "email": "fengmk2@gmail.com"
+  },
+  "keywords": [
+    "koa-gzip", "gzip", "koa"
+  ],
+  "engines": {
+    "node": ">= 0.11.9"
+  },
+  "author": "fengmk2 <fengmk2@gmail.com> (http://fengmk2.github.com)",
+  "license": "MIT"
+}

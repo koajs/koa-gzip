@@ -25,6 +25,20 @@ var app = koa();
 koa.use(gzip());
 ```
 
+### gzip always be the last middleware
+
+If you using other response middlewares, like [etag](https://github.com/koajs/etag), just use `gzip` be the first.
+
+```js
+app.use(gzip());
+app.use(fresh());
+app.use(etag());
+
+client => request => gzip() => fresh() => etag() => logic codes
+                                                        ||
+            client <= gzip() <= fresh() <= etag() <= response
+```
+
 ## License
 
 (The MIT License)

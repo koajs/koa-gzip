@@ -43,7 +43,7 @@ describe('index.test.js', function () {
       return this.body = new Buffer(BODY);
     }
     if (this.url === '/object') {
-      return this.body = {foo: 'bar'};
+      return this.body = {foo: BODY};
     }
     if (this.url === '/number') {
       return this.body = 1984;
@@ -65,6 +65,12 @@ describe('index.test.js', function () {
   });
 
   afterEach(mm.restore);
+
+  describe('gzip()', function () {
+    it('should work with no options', function () {
+      gzip();
+    });
+  });
 
   describe('when status 200 and request accept-encoding include gzip', function () {
     it('should return gzip string body', function (done) {
@@ -121,6 +127,26 @@ describe('index.test.js', function () {
       .expect(200)
       .expect('Content-Encoding', 'gzip')
       .expect(fs.readFileSync(__filename, 'utf8'), done);
+    });
+
+    it('should return gzip json body', function (done) {
+      request(app)
+      .get('/object')
+      .set('Accept-Encoding', 'gzip,deflate,sdch')
+      .expect(200)
+      .expect('Content-Encoding', 'gzip')
+      .expect({foo: BODY}, done);
+    });
+
+    it('should return number body', function (done) {
+      request(app)
+      .get('/number')
+      .set('Accept-Encoding', 'gzip,deflate,sdch')
+      .expect(200, function (err, res) {
+        should.not.exist(err);
+        res.body.should.equal(1984);
+        done();
+      });
     });
   });
 

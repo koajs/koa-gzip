@@ -4,35 +4,20 @@
   "description": "gzip support for koa responses.",
   "main": "index.js",
   "scripts": {
-    "test": "make test-all"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "koa-gzip/index.js",
-      "data-cover-flags": {
-        "debug": false
-      }
-    },
-    "travis-cov": {
-      "threshold": 100
-    }
+    "test": "make test"
   },
   "dependencies": {
     "thunkify-wrap": "0.0.3"
   },
   "devDependencies": {
     "autod": "*",
-    "blanket": "*",
     "contributors": "*",
-    "cov": "*",
-    "coveralls": "*",
+    "istanbul": "*",
     "koa": "0.5.0",
     "mm": "0.2.0",
     "mocha": "*",
-    "mocha-lcov-reporter": "*",
     "should": "3.1.3",
-    "supertest": "0.9.0",
-    "travis-cov": "*"
+    "supertest": "0.9.0"
   },
   "homepage": "https://github.com/fengmk2/koa-gzip",
   "repository": {

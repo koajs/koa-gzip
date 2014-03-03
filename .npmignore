@@ -3,3 +3,5 @@ coverage.html
 Makefile
 .travis.yml
 logo.png
+.DS_Store
+coverage/

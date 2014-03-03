@@ -6,7 +6,7 @@ MOCHA_OPTS =
 install:
 	@npm install --registry=http://r.cnpmjs.org --cache=${HOME}/.npm/.cache/cnpm
 
-test: install
+test:
 	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha \
 		-- -u exports \
@@ -23,11 +23,11 @@ check-coverage:
 		--branches 100 \
 		--lines 100
 
-autod: install
+autod:
 	@./node_modules/.bin/autod -w
 	@$(MAKE) install
 
-contributors: install
+contributors:
 	@./node_modules/.bin/contributors -f plain -o AUTHORS
 
 .PHONY: test

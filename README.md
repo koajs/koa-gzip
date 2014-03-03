@@ -22,7 +22,7 @@ var koa = require('koa');
 var gzip = require('koa-gzip');
 
 var app = koa();
-koa.use(gzip);
+koa.use(gzip());
 ```
 
 ## License

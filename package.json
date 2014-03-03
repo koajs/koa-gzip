@@ -1,6 +1,6 @@
 {
   "name": "koa-gzip",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "gzip support for koa responses.",
   "main": "index.js",
   "scripts": {

@@ -18,12 +18,17 @@ var fs = require('fs');
 var should = require('should');
 var request = require('supertest');
 var koa = require('koa');
+var mm = require('mm');
 var gzip = require('../');
 
 describe('index.test.js', function () {
+  var options = {};
+  var BODY = 'foo bar string, foo bar string, foo bar string, foo bar string, \
+    foo bar string, foo bar string, foo bar string, foo bar string, foo bar string, foo bar string, \
+    foo bar string, foo bar string, foo bar string, foo bar string, foo bar string, foo bar string';
   var app = koa();
   // app.outputErrors = true;
-  app.use(gzip());
+  app.use(gzip(options));
   app.use(function *(next) {
     if (this.url === '/404') {
       return yield next;
@@ -32,10 +37,10 @@ describe('index.test.js', function () {
       return this.body = 'foo bar string';
     }
     if (this.url === '/string') {
-      return this.body = 'foo bar string, foo bar string, foo bar string, foo bar string, foo bar string';
+      return this.body = BODY;
     }
     if (this.url === '/buffer') {
-      return this.body = new Buffer('foo bar string, foo bar string, foo bar string, foo bar string, foo bar string');
+      return this.body = new Buffer(BODY);
     }
     if (this.url === '/object') {
       return this.body = {foo: 'bar'};
@@ -59,6 +64,8 @@ describe('index.test.js', function () {
     app = app.listen(0, done);
   });
 
+  afterEach(mm.restore);
+
   describe('when status 200 and request accept-encoding include gzip', function () {
     it('should return gzip string body', function (done) {
       request(app)
@@ -66,11 +73,11 @@ describe('index.test.js', function () {
       .set('Accept-Encoding', 'gzip,deflate,sdch')
       .expect(200)
       .expect('content-encoding', 'gzip')
-      .expect('content-length', '39')
-      .expect('foo bar string, foo bar string, foo bar string, foo bar string, foo bar string', done);
+      .expect('content-length', '46')
+      .expect(BODY, done);
     });
 
-    it('should return raw string body if gzip body bigger than raw body', function (done) {
+    it('should return raw string body if body smaller than minLength', function (done) {
       request(app)
       .get('/small')
       .set('Accept-Encoding', 'gzip,deflate,sdch')
@@ -82,6 +89,39 @@ describe('index.test.js', function () {
         done();
       });
     });
+
+    it('should return raw string body if gzip body bigger than raw body', function (done) {
+      mm(options, 'minLength', 10);
+      request(app)
+      .get('/small')
+      .set('Accept-Encoding', 'gzip,deflate,sdch')
+      .expect(200)
+      .expect('content-length', '14')
+      .expect('foo bar string', function (err, res) {
+        should.not.exist(err);
+        should.not.exist(res.headers['content-encoding']);
+        done();
+      });
+    });
+
+    it('should return gzip buffer body', function (done) {
+      request(app)
+      .get('/buffer')
+      .set('Accept-Encoding', 'gzip,deflate,sdch')
+      .expect(200)
+      .expect('content-encoding', 'gzip')
+      .expect('content-length', '46')
+      .expect(BODY, done);
+    });
+
+    it('should return gzip stream body', function (done) {
+      request(app)
+      .get('/stream')
+      .set('Accept-Encoding', 'gzip,deflate,sdch')
+      .expect(200)
+      .expect('Content-Encoding', 'gzip')
+      .expect(fs.readFileSync(__filename, 'utf8'), done);
+    });
   });
 
   describe('when status 200 and request accept-encoding exclude gzip', function () {
@@ -90,8 +130,8 @@ describe('index.test.js', function () {
       .get('/string')
       .set('Accept-Encoding', 'deflate,sdch')
       .expect(200)
-      .expect('content-length', '78')
-      .expect('foo bar string, foo bar string, foo bar string, foo bar string, foo bar string',
+      .expect('content-length', '' + BODY.length)
+      .expect(BODY,
       function (err, res) {
         should.not.exist(err);
         should.not.exist(res.headers['content-encoding']);

@@ -20,17 +20,25 @@ var thunkify = require('thunkify-wrap');
 var _gzip = thunkify(zlib.gzip);
 
 module.exports = function (options) {
+  options = options || {};
+  // https://developers.google.com/speed/docs/best-practices/payload#GzipCompression
+  options.minLength = Number(options.minLength) || 150;
+
   return function *gzip(next) {
     yield next;
 
     var body = this.body;
 
-    if (200 !== this.status || !body || this.acceptsEncodings('gzip') !== 'gzip') {
+    if (200 !== this.status
+        || !body
+        || this.acceptsEncodings('gzip') !== 'gzip') {
       return;
     }
 
     // TODO: Stream body
     if ('function' == typeof body.pipe) {
+      this.set('content-encoding', 'gzip');
+      this.body = body.pipe(zlib.createGzip());
       return;
     }
 
@@ -38,6 +46,10 @@ module.exports = function (options) {
       body = new Buffer(body);
     } else if (!Buffer.isBuffer(body)) {
       body = new Buffer(JSON.stringify(body));
+    }
+
+    if (body.length < options.minLength) {
+      return;
     }
 
     var buf = yield _gzip(body);

@@ -4,7 +4,7 @@ TIMEOUT = 1000
 MOCHA_OPTS =
 
 install:
-	@npm install --registry=http://r.cnpmjs.org --cache=${HOME}/.npm/.cache/cnpm
+	@npm install --registry=http://r.cnpmjs.org
 
 test:
 	@NODE_ENV=test node --harmony \
@@ -22,6 +22,9 @@ check-coverage:
 		--functions 100 \
 		--branches 100 \
 		--lines 100
+
+test-cov cov:
+	@./node_modules/.bin/cov coverage
 
 autod:
 	@./node_modules/.bin/autod -w

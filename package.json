@@ -1,6 +1,6 @@
 {
   "name": "koa-gzip",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "gzip support for koa responses.",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     }
   },
   "dependencies": {
-    "thunkify-wrap": "0.0.3"
+    "thunkify-wrap": "0.0.4"
   },
   "devDependencies": {
     "autod": "*",

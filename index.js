@@ -25,7 +25,7 @@ module.exports = function (options) {
   options.minLength = Number(options.minLength) || 150;
 
   return function *gzip(next) {
-    yield next;
+    yield *next;
 
     var body = this.body;
 

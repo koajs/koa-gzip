@@ -31,7 +31,8 @@ module.exports = function (options) {
 
     if (200 !== this.status
         || !body
-        || this.acceptsEncodings('gzip') !== 'gzip') {
+        || this.acceptsEncodings('gzip') !== 'gzip'
+        || this.response.header['content-encoding']) {
       return;
     }
 

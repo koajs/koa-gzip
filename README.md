@@ -1,7 +1,7 @@
 koa-gzip
 =======
 
-[![Build Status](https://secure.travis-ci.org/fengmk2/koa-gzip.png)](http://travis-ci.org/fengmk2/koa-gzip) [![Coverage Status](https://coveralls.io/repos/fengmk2/koa-gzip/badge.png)](https://coveralls.io/r/fengmk2/koa-gzip) [![Dependency Status](https://gemnasium.com/fengmk2/koa-gzip.png)](https://gemnasium.com/fengmk2/koa-gzip)
+[![Build Status](https://secure.travis-ci.org/fengmk2/koa-gzip.png)](http://travis-ci.org/fengmk2/koa-gzip) [![Dependency Status](https://gemnasium.com/fengmk2/koa-gzip.png)](https://gemnasium.com/fengmk2/koa-gzip)
 
 [![NPM](https://nodei.co/npm/koa-gzip.png?downloads=true&stars=true)](https://nodei.co/npm/koa-gzip/)
 

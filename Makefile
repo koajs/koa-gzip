@@ -7,6 +7,14 @@ install:
 	@npm install --registry=http://r.cnpmjs.org
 
 test:
+	@node_modules/.bin/mocha \
+	--harmony \
+	--reporter $(REPORTER) \
+	--timeout $(TIMEOUT) \
+	$(MOCHA_OPTS) \
+	$(TESTS) \
+
+test-cov:
 	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha \
 		-- -u exports \
@@ -22,9 +30,6 @@ check-coverage:
 		--functions 100 \
 		--branches 100 \
 		--lines 100
-
-test-cov cov:
-	@./node_modules/.bin/cov coverage
 
 autod:
 	@./node_modules/.bin/autod -w

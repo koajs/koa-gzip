@@ -18,21 +18,21 @@
     "autod": "*",
     "contributors": "*",
     "cov": "*",
-    "istanbul": "git://github.com/gotwarlost/istanbul.git#harmony",
-    "koa": "0.5.1",
+    "istanbul-harmony": "*",
+    "jshint": "*",
+    "koa": "0.5.5",
     "mm": "0.2.1",
     "mocha": "*",
-    "should": "3.2.0-beta1",
-    "supertest": "0.10.0"
+    "should": "3.3.1",
+    "supertest": "0.11.0"
   },
-  "homepage": "https://github.com/fengmk2/koa-gzip",
+  "homepage": "https://github.com/node-modules/koa-gzip",
   "repository": {
     "type": "git",
-    "url": "git://github.com/fengmk2/koa-gzip.git",
-    "web": "https://github.com/fengmk2/koa-gzip"
+    "url": "git://github.com/node-modules/koa-gzip.git"
   },
   "bugs": {
-    "url": "https://github.com/fengmk2/koa-gzip/issues",
+    "url": "https://github.com/node-modules/koa-gzip/issues",
     "email": "fengmk2@gmail.com"
   },
   "keywords": [

@@ -5,3 +5,4 @@ Makefile
 logo.png
 .DS_Store
 coverage/
+.jshint*

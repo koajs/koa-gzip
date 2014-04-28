@@ -6,7 +6,10 @@ MOCHA_OPTS =
 install:
 	@npm install --registry=http://r.cnpmjs.org
 
-test:
+jshint: install
+	@./node_modules/.bin/jshint .
+
+test: install
 	@node_modules/.bin/mocha \
 	--harmony \
 	--reporter $(REPORTER) \
@@ -14,7 +17,7 @@ test:
 	$(MOCHA_OPTS) \
 	$(TESTS) \
 
-test-cov:
+test-cov cov: install
 	@NODE_ENV=test node --harmony \
 		node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha \
 		-- -u exports \
@@ -22,14 +25,7 @@ test-cov:
 		--timeout $(TIMEOUT) \
 		$(MOCHA_OPTS) \
 		$(TESTS)
-	@$(MAKE) check-coverage
-
-check-coverage:
-	@./node_modules/.bin/istanbul check-coverage \
-		--statements 100 \
-		--functions 100 \
-		--branches 100 \
-		--lines 100
+		@./node_modules/.bin/cov coverage
 
 autod:
 	@./node_modules/.bin/autod -w

@@ -37,7 +37,7 @@ module.exports = function (options) {
     }
 
     // TODO: Stream body
-    if ('function' == typeof body.pipe) {
+    if ('function' === typeof body.pipe) {
       this.set('content-encoding', 'gzip');
       this.remove('content-length');
       this.body = body.pipe(zlib.createGzip());

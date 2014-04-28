@@ -1,4 +1,11 @@
 
+0.1.0 / 2014-04-28
+==================
+
+ * fix links
+ * Merge pull request #4 from coderhaoxin/remove-content-length
+ * remove possible incorrect content-length
+
 0.0.4 / 2014-03-23 
 ==================
 

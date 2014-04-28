@@ -50,6 +50,8 @@ describe('index.test.js', function () {
       return this.body = 1984;
     }
     if (this.url === '/stream') {
+      var stat = fs.statSync(__filename);
+      this.set('content-length', stat.size);
       return this.body = fs.createReadStream(__filename);
     }
     if (this.url === '/exists-encoding') {
@@ -127,7 +129,12 @@ describe('index.test.js', function () {
       .set('Accept-Encoding', 'gzip,deflate,sdch')
       .expect(200)
       .expect('Content-Encoding', 'gzip')
-      .expect(fs.readFileSync(__filename, 'utf8'), done);
+      .expect(fs.readFileSync(__filename, 'utf8'),
+      function (err, res) {
+        should.not.exist(err);
+        should.not.exist(res.headers['content-length']);
+        done();
+      });
     });
 
     it('should return gzip json body', function (done) {
@@ -136,6 +143,7 @@ describe('index.test.js', function () {
       .set('Accept-Encoding', 'gzip,deflate,sdch')
       .expect(200)
       .expect('Content-Encoding', 'gzip')
+      .expect('content-length', '52')
       .expect({foo: BODY}, done);
     });
 
@@ -143,6 +151,7 @@ describe('index.test.js', function () {
       request(app)
       .get('/number')
       .set('Accept-Encoding', 'gzip,deflate,sdch')
+      .expect('content-length', '4')
       .expect(200, function (err, res) {
         should.not.exist(err);
         res.body.should.equal(1984);

@@ -1,13 +1,13 @@
 koa-gzip
 =======
 
-[![Build Status](https://secure.travis-ci.org/node-modules/koa-gzip.png)](http://travis-ci.org/node-modules/koa-gzip)
+[![Build Status](https://secure.travis-ci.org/koajs/koa-gzip.png)](http://travis-ci.org/koajs/koa-gzip)
 
-[![Dependency Status](https://gemnasium.com/node-modules/koa-gzip.png)](https://gemnasium.com/node-modules/koa-gzip)
+[![Dependency Status](https://gemnasium.com/koajs/koa-gzip.png)](https://gemnasium.com/koajs/koa-gzip)
 
 [![NPM](https://nodei.co/npm/koa-gzip.png?downloads=true&stars=true)](https://nodei.co/npm/koa-gzip/)
 
-![logo](https://raw.github.com/node-modules/koa-gzip/master/logo.png)
+![logo](https://raw.github.com/koajs/koa-gzip/master/logo.png)
 
 `gzip` support for [koa](https://github.com/koajs/koa) responses.
 

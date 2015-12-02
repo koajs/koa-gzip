@@ -24,7 +24,7 @@ var koa = require('koa');
 var gzip = require('koa-gzip');
 
 var app = koa();
-koa.use(gzip());
+app.use(gzip());
 ```
 
 ### gzip always be the last middleware

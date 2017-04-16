@@ -29,7 +29,6 @@ describe('index.test.js', function () {
   var app = koa();
   // app.outputErrors = true;
   app.use(gzip(options));
-  app.use(gzip(options));
   app.use(function *(next) {
     if (this.url === '/404') {
       return yield next;

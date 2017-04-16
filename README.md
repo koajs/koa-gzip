@@ -21,6 +21,10 @@ var app = koa();
 app.use(gzip());
 ```
 
+### Options
+
+ - `minLength` Minimum body length to apply the gzip compression. defaults to 150
+
 ### gzip always be the last middleware
 
 If you using other response middlewares, like [etag](https://github.com/koajs/etag), just use `gzip` be the first.
